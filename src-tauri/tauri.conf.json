@@ -15,9 +15,14 @@
       "all": false,
       "fs": {
         "createDir": true,
+        "removeDir": true,
         "readDir": true,
+        "copyFile": true,
         "readFile": true,
         "writeFile": true,
+        "removeFile": true,
+        "renameFile": true,
+        "exists": true,
         "scope": ["$APPCONFIG", "$APPCONFIG/*"]
       },
       "path": {

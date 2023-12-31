@@ -28,7 +28,7 @@ export const useSettings = () => {
         settings.value = loadedSettings;
       }
     } catch (error) {
-      console.error("Fehler beim Laden der Einstellungen:", error);
+      console.error("Failed to load settings:", error);
     }
   };
 
@@ -40,19 +40,19 @@ export const useSettings = () => {
     try {
       await settingsManager.set('settings', settings.value);
     } catch (error) {
-      console.error("Fehler beim Speichern der Einstellungen:", error);
+      console.error("Failed to save settings:", error);
     }
   };
 
   const saveSettingsToDisk = async () => {
     try {
-      console.log("Speichern der Einstellungen:", settings.value);
+      console.log("Saving the settings:", settings.value);
       await settingsManager.syncCache();
-      console.log("Einstellungen gespeichert.");
+      console.log("Settings saved.");
     } catch (error) {
-      console.error("Fehler beim Speichern der Einstellungen auf der Festplatte:", error);
+      console.error("Failed to save settings on disk:", error);
       if (error instanceof Error) {
-        console.error("Fehlerdetails:", error.message);
+        console.error("Error Details:", error.message);
       }
     }
   };
