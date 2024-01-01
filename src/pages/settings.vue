@@ -67,17 +67,29 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue";
+import { onMounted, ref} from "vue";
 import { useSettings } from "../hooks/useSettings";
+import { SettingsManager } from 'tauri-settings';
+
+interface Settings {
+  sourceDirectory: string;
+  targetDirectory: string;
+  selectedCopyMode: string | null;
+  selectedLanguage: string | null;
+}
+
+const settingsManager = new SettingsManager('copybot-settings');
+const settings = ref<Settings>({
+  sourceDirectory: '',
+  targetDirectory: '',
+  selectedCopyMode: null,
+  selectedLanguage: null,
+});
 
 const {
-  settings,
   loadSettings,
-  copyModes,
-  languages,
-  saveSettingsToDisk,
-  updateSetting
-} = useSettings();
+  saveSettings,
+} = useSettings(settingsManager, settings);
 
 const browseDirectory = () => {
   /* ... */
@@ -85,6 +97,7 @@ const browseDirectory = () => {
 const setTargetDirectory = () => {
   /* ... */
 };
+
 
 onMounted(loadSettings);
 </script>

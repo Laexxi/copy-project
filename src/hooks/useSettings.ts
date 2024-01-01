@@ -9,17 +9,6 @@ interface Settings {
   selectedLanguage: string | null;
 }
 
-const settingsManager = new SettingsManager('copybot-settings');
-const settings = ref<Settings>({
-  sourceDirectory: '',
-  targetDirectory: '',
-  selectedCopyMode: null,
-  selectedLanguage: null,
-});
-
-const copyModes = ref(['Auto', 'Manual']);
-const languages = ref(['English', 'Deutsch', 'Français']);
-
 export const useSettings = () => {
   const loadSettings = async () => {
     try {
@@ -30,10 +19,6 @@ export const useSettings = () => {
     } catch (error) {
       console.error("Failed to load settings:", error);
     }
-  };
-
-  const updateSetting = async (key, value) => {
-    settingsManager.setCache(key, value);
   };
 
   const saveSettings = async () => {
@@ -57,15 +42,9 @@ export const useSettings = () => {
     }
   };
 
-  watch(settings, saveSettings, { deep: true });
-
   return {
-    settings,
     loadSettings,
     saveSettings,
-    copyModes,
-    languages,
-    saveSettingsToDisk,
-    updateSetting  
+    saveSettingsToDisk
   };
 };
