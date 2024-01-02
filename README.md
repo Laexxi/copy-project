@@ -1,75 +1,61 @@
-# Nuxt 3 Minimal Starter
+# CopyTool
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+This is my first ever (finished) Project. The need came from constantly having to organize and tidy up my download folder. I got the idea of making the moving of files more conveniant without having to move file by file.
+CopyTool is a powerful, user-friendly tool designed for copying or moving files and folders based on user-defined criteria. The tool is ideal for organizing files efficiently, allowing users to manually or automatically assign tags to files and folders, which then determine their destination directories.
+As I am developing on windows it will (should lol) work there. I chose Python because of multiplatforming possibilites but did not test this yet.
 
-## Setup
+# Features
 
-Make sure to install the dependencies:
+- Custom Source Directory: Select a source directory from where the files and folders will be processed.
+- Manual Mode: In the manual mode, users can assign custom tags to each item (file or folder) which correspond to specific target directories.
+- Multilingual Support: The tool is equipped to support multiple languages.
+- Light/Dark Mode: I do not know why you would want a Light mode, but it was a nice challange
 
-```bash
-# npm
-npm install
+# Upcoming (not in particular order)
 
-# pnpm
-pnpm install
+- Automatic Mode: The automatic mode reads the names of items and suggests target directories based on predefined tags.
+- Initial Setup at First start
+- see what the tool is actually doing
+- Logs (with own settings, how long to save, ...)
+- More Languages
+- Pause and Resume
+- Priority with drag and drop
+- Better UI
+- Report at the end
+- Maybe: Copy/move to Cloud
+- Maybe: Find and rename duplicates
+- Maybe: Improved Tagging (Auto-Tagging by file type)
+- Maybe: Automatic workflow
 
-# yarn
-yarn install
+# Known Bugs/Issues
 
-# bun
-bun install
-```
+- the download directory after the first start of the tool (automatic generated config) is not recognized, you need to manually set a sourcedirectory
+- french language is a bait
 
-## Development Server
+# Getting Started
 
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
+To get started with CopyTool, clone the repository and ensure that all dependencies are installed.
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+git clone https://github.com/Laexxi/copytool.git
+cd copytool
 ```
 
-Locally preview production build:
+# Install dependencies
 
-```bash
-# npm
-npm run preview
+# Usage
 
-# pnpm
-pnpm run preview
+Launch the application.
+Go to Settings and set the source directory from where you want to manage the files.
+Choose between manual or automatic mode (not yet).
+Add some tags for your destination directories.
+If necessary, adjust the settings to suit your language or theme preferences.
+Initiate the copying or moving process.
 
-# yarn
-yarn preview
+# Contributing
 
-# bun
-bun run preview
-```
+I am a new developer and have no idea what I am doing. Sadly I wont be able to review and manage (large) contributions. I might be able to use them, but maybe not.
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+# License
+
+This project is licensed under the GPL-3.0 License - see the LICENSE file for details.

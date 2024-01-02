@@ -12,7 +12,14 @@
 
         <v-list density="compact" nav height="70%">
           <v-list-item @click="goto('index')" prepend-icon="mdi-home" title="Home" value="index"></v-list-item>
-          <v-list-item @click="goto('settings')" prepend-icon="mdi-cog" title="Settings" value="settings"></v-list-item>
+          <v-list-item @click="toggleSubmenu('settings')" prepend-icon="mdi-cog" title="Settings"
+            value="settings"></v-list-item>
+          <template v-if="submenu === 'settings'">
+            <v-list-item class="submenu-item" @click="goto('settings')" prepend-icon="mdi-wrench" title="General"
+              value="settings"></v-list-item>
+            <v-list-item class="submenu-item" @click="goto('folderandtags')" prepend-icon="mdi-folder-multiple"
+              title="Folder and Tags" value="folderandtags"></v-list-item>
+          </template>
           <v-list-item @click="goto('about')" prepend-icon="$info" title="About" value="about"></v-list-item>
         </v-list>
         <v-divider></v-divider>
@@ -39,6 +46,8 @@ const theme = useTheme();
 const router = useRouter();
 const drawer = ref(true);
 const rail = ref(true);
+const submenu = ref(null);
+
 
 const themeIcon = computed(() => {
   return settings.value.theme === 'dark' ? 'mdi-weather-night' : 'mdi-weather-sunny';
@@ -46,19 +55,31 @@ const themeIcon = computed(() => {
 
 
 //Methods
+const toggleSubmenu = (menu) => {
+  if (submenu.value !== menu) {
+    submenu.value = menu;
+    if (menu === 'settings') {
+      goto('settings');
+    }
+  }
+};
+
 const goto = (page) => {
+  if (page !== 'settings' && page !== 'folderandtags') {
+    submenu.value = null;
+  }
   router.push({ name: page });
 };
 
 const toggleTheme = async () => {
   try {
-  const newTheme = theme.global.current.value.dark ? 'light' : 'dark';
-  theme.global.name.value = newTheme;
-  settings.value.theme = newTheme;
-  await saveSettings();
-} catch (error) {
-  console.error('Error while changing themes:', error);
-}
+    const newTheme = theme.global.current.value.dark ? 'light' : 'dark';
+    theme.global.name.value = newTheme;
+    settings.value.theme = newTheme;
+    await saveSettings();
+  } catch (error) {
+    console.error('Error while changing themes:', error);
+  }
 };
 </script>
     
@@ -77,6 +98,14 @@ const toggleTheme = async () => {
 .v-list-item:active {
   background-color: #1565C0;
   /* Ausgewählter Button */
+}
+
+.submenu-item {
+  margin-left: 20px;
+}
+
+.submenu-item .v-icon {
+  font-size: 14px;
 }
 
 /* Stil für den eingeklappten Zustand */
