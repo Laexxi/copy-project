@@ -6,7 +6,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import { settingsManager } from './hooks/useSettings';
+import { settingsManager } from './hooks/useSettings.js';
 import { useTheme } from 'vuetify';
 
 const themeSetting = ref('dark');

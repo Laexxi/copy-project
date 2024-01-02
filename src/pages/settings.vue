@@ -64,6 +64,6 @@
 </template>
 
 <script setup>
-import { settings, saveSettings } from '../hooks/useSettings';
+import { settings, saveSettings } from '../hooks/useSettings.js';
 
 </script>

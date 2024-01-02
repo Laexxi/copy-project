@@ -32,7 +32,7 @@
 import { ref } from 'vue';
 import { useTheme } from 'vuetify';
 import { useRouter } from 'vue-router';
-import { settings, saveSettings } from '../hooks/useSettings.ts';
+import { settings, saveSettings } from '../hooks/useSettings.js';
 
 // Data
 const theme = useTheme();
@@ -50,11 +50,15 @@ const goto = (page) => {
   router.push({ name: page });
 };
 
-const toggleTheme = () => {
+const toggleTheme = async () => {
+  try {
   const newTheme = theme.global.current.value.dark ? 'light' : 'dark';
   theme.global.name.value = newTheme;
   settings.value.theme = newTheme;
-  saveSettings();
+  await saveSettings();
+} catch (error) {
+  console.error('Error while changing themes:', error);
+}
 };
 </script>
     
