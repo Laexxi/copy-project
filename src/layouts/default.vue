@@ -17,7 +17,7 @@
         </v-list>
         <v-divider></v-divider>
         <v-btn @click="toggleTheme" variant="plain" class="d-flex justify-center align-center">
-          <v-icon>{{ darkMode ? 'mdi-weather-night' : 'mdi-weather-sunny' }}</v-icon>
+          <v-icon>{{ themeIcon }}</v-icon>
         </v-btn>
       </v-navigation-drawer>
       <v-main style="height: 250px">
@@ -39,7 +39,11 @@ const theme = useTheme();
 const router = useRouter();
 const drawer = ref(true);
 const rail = ref(true);
-const darkMode = ref(true);
+
+const themeIcon = computed(() => {
+  return settings.value.theme === 'dark' ? 'mdi-weather-night' : 'mdi-weather-sunny';
+});
+
 
 //Methods
 const goto = (page) => {
@@ -48,7 +52,6 @@ const goto = (page) => {
 
 const toggleTheme = () => {
   const newTheme = theme.global.current.value.dark ? 'light' : 'dark';
-  darkMode.value = !darkMode.value;
   theme.global.name.value = newTheme;
   settings.value.theme = newTheme;
   saveSettings();

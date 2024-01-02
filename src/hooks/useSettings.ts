@@ -35,13 +35,4 @@ const saveSettings = async () => {
   await settingsManager.syncCache();
 };
 
-// Watch for theme changes and apply them
-watch(
-  () => settings.value.theme,
-  (newTheme) => {
-    const theme = useTheme();
-    theme.global.name.value = newTheme;
-  }
-);
-
 export { settings, saveSettings, settingsManager };
