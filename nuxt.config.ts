@@ -13,12 +13,7 @@ export default defineNuxtConfig({
         config.plugins?.push(vuetify({ autoImport: true}))
       })
     },
-    '@nuxtjs/i18n',
   ],
-  i18n:  {
-    locales: ['en', 'fr', 'de'],
-    defaultLocale: 'en',
-  },
   vite: {
     vue: {
       template: {

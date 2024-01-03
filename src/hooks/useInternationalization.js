@@ -1,7 +1,10 @@
-import { useI18n } from "vue-i18n";
+import { vue } from "vue";
+import { VueI18n } from "vue-i18n";
+
+vue.use(VueI18n);
 
 export function useInternationalization() {
-  const { locale, t } = useI18n();
+  const { locale, t } = VueI18n();
 
   const setLanguage = (lang) => {
     locale.value = lang;
