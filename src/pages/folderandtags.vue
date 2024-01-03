@@ -44,11 +44,10 @@
 </template>
   
 <script setup>
-import { ref } from 'vue';
-import { v4 as uuidv4 } from 'uuid';
+import { ref, onMounted, computed } from 'vue';
 import { open } from '@tauri-apps/api/dialog';
-
-const tags = ref([]);
+import { settings, saveSettings, initializeSettings } from '../hooks/useSettings';
+import { v4 as uuidv4 } from 'uuid';
 
 const headers = [
     { text: 'Tag', align: 'start', sortable: false, value: 'tag' },
@@ -58,8 +57,16 @@ const headers = [
 
 const dialog = ref(false);
 const editedIndex = ref(-1);
-const editedItem = ref({ tag: '', directory: '' });
+const editedItem = ref({ id: '', tag: '', directory: '' });
 const formTitle = ref('');
+
+// Verwenden Sie computed, um die Reaktivität sicherzustellen
+const tags = computed(() => settings.value.tags);
+
+// Beim Start die Einstellungen initialisieren
+onMounted(async () => {
+    await initializeSettings();
+});
 
 function openEditDialog(item) {
     editedIndex.value = tags.value.indexOf(item);
@@ -70,7 +77,7 @@ function openEditDialog(item) {
 
 function openAddDialog() {
     editedIndex.value = -1;
-    editedItem.value = { tag: '', directory: '' };
+    editedItem.value = { id: uuidv4(), tag: '', directory: '' };
     formTitle.value = 'Neuer Eintrag';
     dialog.value = true;
 }
@@ -91,7 +98,8 @@ function browseDirectory() {
 function deleteItem(item) {
     const index = tags.value.indexOf(item);
     if (index > -1) {
-        tags.value.splice(index, 1);
+        settings.value.tags.splice(index, 1);
+        saveSettings();
     }
 }
 
@@ -103,8 +111,9 @@ function save() {
     if (editedIndex.value > -1) {
         Object.assign(tags.value[editedIndex.value], editedItem.value);
     } else {
-        tags.value.push({ id: uuidv4(), ...editedItem.value });
+        settings.value.tags.push({ ...editedItem.value });
     }
+    saveSettings();
     close();
 }
 </script>

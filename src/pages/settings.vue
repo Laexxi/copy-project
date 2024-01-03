@@ -30,16 +30,6 @@
         <v-select label="Language" :items="['English', 'Deutsch', 'Français']" v-model="settings.language"></v-select>
       </v-col>
     </v-row>
-
-    <!-- Target Directory -->
-    <v-row align="center">
-      <v-col cols="10">
-        <v-text-field label="Target Directory" readonly></v-text-field>
-      </v-col>
-      <v-col cols="2">
-        <v-btn @click="">Set Target</v-btn>
-      </v-col>
-    </v-row>
   </v-container>
 </template>
 
