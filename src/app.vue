@@ -21,7 +21,7 @@ onMounted(async () => {
       theme.global.name.value = savedTheme;
     }
   } catch (error) {
-    console.error('Fehler beim Laden der Theme-Einstellung:', error);
+    console.error('Error loading the theme setting:', error);
   }
 });
 

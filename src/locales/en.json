@@ -1,0 +1,18 @@
+{
+  "index": {
+    "title": "Start",
+    "home": "Home",
+    "about": {
+      "about": "About",
+      "title": "About the Application",
+      "license": "This application is licensed under the GNU General Public License v3.0 (GPL v3). The GPL is a widely used free software license, which guarantees end users the freedom to run, study, share, and modify the software. The choice of this license ensures that this application remains free and open for the community.",
+      "textbody": "If you like the app and feel like supporting me, I'd be really stoked about any contribution that works for you. Your support means a lot to me and it helps keep the app going and developing new features.",
+      "kofi": "Support on Ko-Fi"
+    },
+    "settings": {
+      "settings": "Settings",
+      "general": "General",
+      "folderandtags": "Folder and Tags"
+    }
+  }
+}

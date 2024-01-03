@@ -11,16 +11,18 @@
         <v-divider></v-divider>
 
         <v-list density="compact" nav height="70%">
-          <v-list-item @click="goto('index')" prepend-icon="mdi-home" title="Home" value="index"></v-list-item>
-          <v-list-item @click="toggleSubmenu('settings')" prepend-icon="mdi-cog" title="Settings"
+          <v-list-item @click="goto('index')" prepend-icon="mdi-home" :title="$t('index.home')"
+            value="index"></v-list-item>
+          <v-list-item @click="toggleSubmenu('settings')" prepend-icon="mdi-cog" :title="$t('index.settings.settings')"
             value="settings"></v-list-item>
           <template v-if="submenu === 'settings'">
-            <v-list-item class="submenu-item" @click="goto('settings')" prepend-icon="mdi-wrench" title="General"
-              value="settings"></v-list-item>
+            <v-list-item class="submenu-item" @click="goto('settings')" prepend-icon="mdi-wrench"
+              :title="$t('index.settings.general')" value="settings"></v-list-item>
             <v-list-item class="submenu-item" @click="goto('folderandtags')" prepend-icon="mdi-folder-multiple"
-              title="Folder and Tags" value="folderandtags"></v-list-item>
+              :title="$t('index.settings.folderandtags')" value="folderandtags"></v-list-item>
           </template>
-          <v-list-item @click="goto('about')" prepend-icon="$info" title="About" value="about"></v-list-item>
+          <v-list-item @click="goto('about')" prepend-icon="$info" :title="$t('index.about.about')"
+            value="about"></v-list-item>
         </v-list>
         <v-divider></v-divider>
         <v-btn @click="toggleTheme" variant="plain" class="d-flex justify-center align-center">

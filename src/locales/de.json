@@ -1,0 +1,18 @@
+{
+  "index": {
+    "title": "Starten",
+    "home": "Start",
+    "about": {
+      "about": "Über",
+      "title": "Über die App",
+      "license": "Diese Anwendung ist unter der GNU General Public License v3.0 (GPL v3) lizenziert. Die GPL ist eine weit verbreitete Lizenz für freie Software, die den Endnutzern die Freiheit garantiert, die Software zu betreiben, zu studieren, zu teilen und zu verändern. Die Wahl dieser Lizenz stellt sicher, dass diese Anwendung für die Gemeinschaft frei und offen bleibt.",
+      "textbody": "Falls dir die App gefällt und du Lust hast, mich zu supporten, freue ich mich sehr über jeden Beitrag, der für dich passt. Deine Unterstützung ist echt wichtig für mich und hilft dabei, die App am Laufen zu halten und neue Features zu entwickeln.",
+      "kofi": "Unterstütze auf Ko-Fi"
+    },
+    "settings": {
+      "settings": "Einstellungen",
+      "general": "Allgemein",
+      "folderandtags": "Ordner und Tags"
+    }
+  }
+}
