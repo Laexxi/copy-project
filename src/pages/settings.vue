@@ -3,31 +3,33 @@
     <!-- Kopfzeile -->
     <v-row>
       <v-col cols="12">
-        <h1>Settings</h1>
+        <h1>{{ $t('settings.settings') }}</h1>
       </v-col>
     </v-row>
 
     <!-- Source Directory -->
     <v-row align="center">
       <v-col cols="10">
-        <v-text-field label="Source Directory" readonly v-model="settings.sourceDirectory"></v-text-field>
+        <v-text-field :label="$t('settings.source')" readonly v-model="settings.sourceDirectory"></v-text-field>
       </v-col>
       <v-col cols="2">
-        <v-btn @click="browseDirectory">Browse</v-btn>
+        <v-btn @click="browseDirectory">{{ $t('settings.browse') }}</v-btn>
       </v-col>
     </v-row>
 
     <!-- Copy Mode -->
     <v-row>
       <v-col cols="12">
-        <v-select label="Copy Mode" :items="['Manual', 'Automatic']" v-model="settings.copyMode"></v-select>
+        <v-select :label="$t('settings.mode')" :items="[$t('settings.manual'), $t('settings.automatic')]"
+          v-model="settings.copyMode"></v-select>
       </v-col>
     </v-row>
 
     <!-- Language Selection -->
     <v-row>
       <v-col cols="12">
-        <v-select label="Language" :items="['English', 'Deutsch', 'Français']" v-model="settings.language"></v-select>
+        <v-select :label="$t('settings.language')" :items="['English', 'Deutsch', 'Français']"
+          v-model="settings.language"></v-select>
       </v-col>
     </v-row>
   </v-container>

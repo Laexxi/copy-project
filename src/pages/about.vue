@@ -2,20 +2,20 @@
   <v-container>
     <v-row>
       <v-col cols="12">
-        <h1>{{ $t('index.about.title') }}</h1>
+        <h1>{{ $t('about.title') }}</h1>
         <p class="text-justify">
-          {{ $t('index.about.license') }}
+          {{ $t('about.license') }}
         </p>
 
-        <v-divider class="my-4"></v-divider> <!-- Visueller Trenner -->
+        <v-divider class="my-4"></v-divider>
 
         <p class="text-justify">
-          {{ $t('index.about.textbody') }}
+          {{ $t('about.textbody') }}
         </p>
 
         <v-btn color="orange" href="https://ko-fi.com/laexxi" target="_blank" class="mt-2">
           <v-icon left>mdi-coffee</v-icon>
-          {{ $t('index.about.kofi') }}
+          {{ $t('about.kofi') }}
         </v-btn>
       </v-col>
     </v-row>
@@ -23,9 +23,7 @@
 </template>
   
 <script>
-export default {
-  // Component configuration
-};
+
 </script>
   
 <style scoped>

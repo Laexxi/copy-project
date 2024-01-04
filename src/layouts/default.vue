@@ -2,7 +2,7 @@
   <v-app>
     <v-layout>
       <v-navigation-drawer v-model="drawer" :rail="rail" permanent @click="rail = false">
-        <v-list-item prepend-icon="$menu" title="Navigation">
+        <v-list-item prepend-icon="$menu" :title="$t('index.title')">
           <template v-slot:append>
             <v-btn variant="text" icon="mdi-chevron-left" @click.stop="rail = !rail"></v-btn>
           </template>
@@ -13,16 +13,15 @@
         <v-list density="compact" nav height="70%">
           <v-list-item @click="goto('index')" prepend-icon="mdi-home" :title="$t('index.home')"
             value="index"></v-list-item>
-          <v-list-item @click="toggleSubmenu('settings')" prepend-icon="mdi-cog" :title="$t('index.settings.settings')"
+          <v-list-item @click="toggleSubmenu('settings')" prepend-icon="mdi-cog" :title="$t('settings.settings')"
             value="settings"></v-list-item>
           <template v-if="submenu === 'settings'">
             <v-list-item class="submenu-item" @click="goto('settings')" prepend-icon="mdi-wrench"
-              :title="$t('index.settings.general')" value="settings"></v-list-item>
+              :title="$t('settings.general')" value="settings"></v-list-item>
             <v-list-item class="submenu-item" @click="goto('folderandtags')" prepend-icon="mdi-folder-multiple"
-              :title="$t('index.settings.folderandtags')" value="folderandtags"></v-list-item>
+              :title="$t('settings.folderandtags')" value="folderandtags"></v-list-item>
           </template>
-          <v-list-item @click="goto('about')" prepend-icon="$info" :title="$t('index.about.about')"
-            value="about"></v-list-item>
+          <v-list-item @click="goto('about')" prepend-icon="$info" :title="$t('about.about')" value="about"></v-list-item>
         </v-list>
         <v-divider></v-divider>
         <v-btn @click="toggleTheme" variant="plain" class="d-flex justify-center align-center">
@@ -94,12 +93,12 @@ const toggleTheme = async () => {
 
 .v-list-item:hover {
   background-color: #1976D2;
-  /* Hover-Effekt */
+  /* Hover-Effect */
 }
 
 .v-list-item:active {
   background-color: #1565C0;
-  /* Ausgewählter Button */
+  /* Active Button */
 }
 
 .submenu-item {
@@ -110,7 +109,7 @@ const toggleTheme = async () => {
   font-size: 14px;
 }
 
-/* Stil für den eingeklappten Zustand */
+/* Stil for collapsed drawer*/
 @media (max-width: 960px) {
   .v-navigation-drawer .v-list-item-content {
     display: none;

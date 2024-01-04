@@ -7,9 +7,9 @@
             </template>
             <template v-slot:top>
                 <v-toolbar flat>
-                    <v-toolbar-title>Tags</v-toolbar-title>
+                    <v-toolbar-title>{{ $t('fat.tags') }}</v-toolbar-title>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary" dark class="mb-2" @click="openAddDialog">Neuer Eintrag</v-btn>
+                    <v-btn color="primary" dark class="mb-2" @click="openAddDialog">{{ $t('fat.newentry') }}</v-btn>
                 </v-toolbar>
             </template>
         </v-data-table>
@@ -24,10 +24,10 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field v-model="editedItem.tag" label="Tag"></v-text-field>
+                                <v-text-field v-model="editedItem.tag" :label="t('fat.tag')"></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field v-model="editedItem.directory" label="Directory" readonly
+                                <v-text-field v-model="editedItem.directory" :label="t('fat.directory')" readonly
                                     @click="browseDirectory"></v-text-field>
                             </v-col>
                         </v-row>
@@ -35,8 +35,8 @@
                 </v-card-text>
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" text @click="close">Abbrechen</v-btn>
-                    <v-btn color="blue darken-1" text @click="save">Speichern</v-btn>
+                    <v-btn color="blue darken-1" text @click="close">{{ $t('fat.abort') }}</v-btn>
+                    <v-btn color="blue darken-1" text @click="save">{{ $t('fat.save') }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -48,12 +48,15 @@ import { ref, onMounted, computed } from 'vue';
 import { open } from '@tauri-apps/api/dialog';
 import { settings, saveSettings, initializeSettings } from '../hooks/useSettings';
 import { v4 as uuidv4 } from 'uuid';
+import { useI18n } from 'vue-i18n';
 
-const headers = [
-    { text: 'Tag', align: 'start', sortable: false, value: 'tag' },
-    { text: 'Directory', value: 'directory' },
-    { text: 'Aktionen', value: 'action', sortable: false }
-];
+const { t } = useI18n();
+
+const headers = computed(() => [
+    { text: t('fat.tag'), align: 'start', sortable: false, value: 'tag' },
+    { text: t('fat.directory'), value: 'directory' },
+    { text: t('fat.actions'), value: 'action', sortable: false }
+]);
 
 const dialog = ref(false);
 const editedIndex = ref(-1);
@@ -71,14 +74,14 @@ onMounted(async () => {
 function openEditDialog(item) {
     editedIndex.value = tags.value.indexOf(item);
     editedItem.value = Object.assign({}, item);
-    formTitle.value = 'Eintrag bearbeiten';
+    formTitle.value = t('fat.edit');
     dialog.value = true;
 }
 
 function openAddDialog() {
     editedIndex.value = -1;
     editedItem.value = { id: uuidv4(), tag: '', directory: '' };
-    formTitle.value = 'Neuer Eintrag';
+    formTitle.value = t('fat.new');
     dialog.value = true;
 }
 
@@ -91,7 +94,7 @@ function browseDirectory() {
             editedItem.value.directory = selected;
         }
     }).catch(error => {
-        console.error('Fehler beim Auswählen eines Verzeichnisses:', error);
+        console.error('Error while choosing a directory:', error);
     });
 }
 
@@ -118,6 +121,4 @@ function save() {
 }
 </script>
   
-<style>
-/* Hier können Sie benutzerdefinierte Stile hinzufügen */
-</style>
+<style></style>

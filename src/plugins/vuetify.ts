@@ -4,6 +4,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import { md1, md2, md3 } from 'vuetify/blueprints'
 
+
 export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
     blueprint: md2,
