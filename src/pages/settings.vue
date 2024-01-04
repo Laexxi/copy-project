@@ -39,12 +39,25 @@
 import { settings, saveSettings } from '../hooks/useSettings.js';
 import { watch } from 'vue';
 import { open } from '@tauri-apps/api/dialog';
+import { useI18n } from 'vue-i18n';
 
-watch(() => settings.value, async (newSettings, oldSettings) => {
-  // Do not save while Initialilzing when there are nor oldSettings
-  if (oldSettings) {
-    await saveSettings();
+const { locale } = useI18n();
+
+const languageMap = {
+  'English': 'en',
+  'Deutsch': 'de',
+  'Français': 'fr'
+};
+
+watch(() => settings.value.language, (newLanguage) => {
+  const langCode = languageMap[newLanguage];
+  if (langCode) {
+    locale.value = langCode;
   }
+});
+
+watch(() => settings.value, async () => {
+  await saveSettings();
 }, { deep: true });
 
 const browseDirectory = async () => {

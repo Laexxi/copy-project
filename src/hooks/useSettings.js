@@ -18,7 +18,7 @@ const settings = ref(defaultSettings);
 // Initialize settings
 async function initializeSettings() {
   const loadedSettings = await settingsManager.initialize();
-  settings.value = loadedSettings;
+  Object.assign(settings.value, loadedSettings);
 }
 
 // Function to save settings
