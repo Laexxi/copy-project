@@ -15,6 +15,7 @@ As I am developing on windows it will (should lol) work there. I chose Python be
 
 - Automatic Mode: The automatic mode reads the names of items and suggests target directories based on predefined tags.
 - Initial Setup at First start
+- export locale-files for easy adding of new languages
 - see what the tool is actually doing
 - Logs (with own settings, how long to save, ...)
 - More Languages

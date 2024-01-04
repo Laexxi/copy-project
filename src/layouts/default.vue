@@ -22,6 +22,8 @@
               :title="$t('settings.folderandtags')" value="folderandtags"></v-list-item>
           </template>
           <v-list-item @click="goto('about')" prepend-icon="$info" :title="$t('about.about')" value="about"></v-list-item>
+          <v-list-item @click="goto('unittest')" prepend-icon="mdi-test-tube" title="Unittest"
+            value="unittest"></v-list-item>
         </v-list>
         <v-divider></v-divider>
         <v-btn @click="toggleTheme" variant="plain" class="d-flex justify-center align-center">

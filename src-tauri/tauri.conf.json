@@ -23,7 +23,7 @@
         "removeFile": true,
         "renameFile": true,
         "exists": true,
-        "scope": ["$APPCONFIG", "$APPCONFIG/*"]
+        "scope": ["$APPCONFIG", "$APPCONFIG/*", "$RESOURCE/*"]
       },
       "dialog": {
         "all": false,
