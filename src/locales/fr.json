@@ -1,0 +1,42 @@
+{
+  "$vuetify": {
+    "dataIterator": {
+      "rowsPerPageText": "Éléments par page :",
+      "pageText": "{0}-{1} de {2}"
+    }
+  },
+  "index": {
+    "start": "Démarrer",
+    "home": "Start",
+    "title": "Navigation"
+  },
+  "settings": {
+    "settings": "Paramètres",
+    "general": "Général",
+    "folderandtags": "Dossiers et Étiquettes",
+    "source": "Répertoire Source",
+    "browse": "Parcourir",
+    "mode": "Mode",
+    "manual": "Manuel",
+    "automatic": "Automatique",
+    "language": "Langue"
+  },
+  "about": {
+    "about": "À propos",
+    "title": "À propos de l'application",
+    "license": "Cette application est sous licence GNU General Public License v3.0 (GPL v3). La GPL est une licence très répandue pour les logiciels libres, qui garantit aux utilisateurs finaux la liberté d'exploiter, d'étudier, de partager et de modifier le logiciel. Le choix de cette licence garantit que cette application reste libre et ouverte à la communauté.",
+    "textbody": "Si vous aimez l'application et que vous souhaitez me soutenir, je serais vraiment heureux de recevoir toute contribution qui vous convient. Votre soutien est très important pour moi et aide à maintenir l'application en fonctionnement et à développer de nouvelles fonctionnalités.",
+    "kofi": "Soutenir sur Ko-Fi"
+  },
+  "fat": {
+    "tags": "Étiquettes",
+    "newentry": "Nouvelle Entrée",
+    "tag": "Étiquette",
+    "directory": "Répertoire",
+    "abort": "Annuler",
+    "save": "Enregistrer",
+    "edit": "Modifier l'entrée",
+    "new": "Nouvelle Entrée",
+    "actions": "Actions"
+  }
+}
