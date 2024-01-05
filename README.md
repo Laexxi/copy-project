@@ -26,18 +26,19 @@ As I am developing on windows it will (should lol) work there. I chose Python be
 - Maybe: Find and rename duplicates
 - Maybe: Improved Tagging (Auto-Tagging by file type)
 - Maybe: Automatic workflow
+- Fully automated version management and package publishing
 
 # Known Bugs/Issues
 
-- french language is a bait
+- Missing translation in Table
 
 # Getting Started
 
 To get started with CopyTool, clone the repository and ensure that all dependencies are installed.
 
 ```bash
-git clone https://github.com/Laexxi/copytool.git
-cd copytool
+git clone https://github.com/Laexxi/copy-project.git
+cd copy-project
 ```
 
 # Install dependencies

@@ -26,9 +26,17 @@
           <v-list-item @click="goto('about')" prepend-icon="$info" :title="$t('about.about')" value="about"></v-list-item>
         </v-list>
         <v-divider></v-divider>
-        <v-btn @click="toggleTheme" variant="plain" class="d-flex justify-center align-center">
-          <v-icon>{{ themeIcon }}</v-icon>
-        </v-btn>
+
+        <v-footer class="d-flex align-center">
+          <div>
+            <v-btn @click="toggleTheme" variant="plain">
+              <v-icon>{{ themeIcon }}</v-icon>
+            </v-btn>
+          </div>
+          <div>
+            <span class="version-number">Version: 0.1.0-alpha1</span>
+          </div>
+        </v-footer>
       </v-navigation-drawer>
       <v-main style="height: 250px">
         <NuxtPage></NuxtPage>
@@ -116,5 +124,11 @@ const toggleTheme = async () => {
   .v-navigation-drawer .v-list-item-content {
     display: none;
   }
+}
+
+.version-number {
+  font-size: 12px;
+  color: #777;
+  margin-left: 10px;
 }
 </style>
