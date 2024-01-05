@@ -21,6 +21,8 @@
             <v-list-item class="submenu-item" @click="goto('folderandtags')" prepend-icon="mdi-folder-multiple"
               :title="$t('settings.folderandtags')" value="folderandtags"></v-list-item>
           </template>
+          <v-list-item @click="goto('automation')" prepend-icon="mdi-flash" :title="$t('auto.auto')"
+            value="automation"></v-list-item>
           <v-list-item @click="goto('about')" prepend-icon="$info" :title="$t('about.about')" value="about"></v-list-item>
         </v-list>
         <v-divider></v-divider>

@@ -38,5 +38,8 @@
     "edit": "Edit Entry",
     "new": "New Entry",
     "actions": "Actions"
+  },
+  "auto": {
+    "auto": "Automation"
   }
 }

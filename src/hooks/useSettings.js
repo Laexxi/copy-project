@@ -6,7 +6,8 @@ const defaultSettings = {
   theme: "dark", // Default theme
   language: "English", // Default language
   copyMode: "Manual", // Default copy mode
-  tags: [],
+  tags: [], //tags and folder array
+  sourceDirectory: "",
 };
 
 // Create a settings manager instance
@@ -27,6 +28,10 @@ const saveSettings = async () => {
   await settingsManager.setCache("language", settings.value.language);
   await settingsManager.setCache("copyMode", settings.value.copyMode);
   await settingsManager.setCache("tags", settings.value.tags);
+  await settingsManager.setCache(
+    "sourceDirectory",
+    settings.value.sourceDirectory
+  );
   await settingsManager.syncCache();
 };
 

@@ -29,7 +29,6 @@ As I am developing on windows it will (should lol) work there. I chose Python be
 
 # Known Bugs/Issues
 
-- the download directory after the first start of the tool (automatic generated config) is not recognized, you need to manually set a sourcedirectory
 - french language is a bait
 
 # Getting Started
