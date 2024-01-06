@@ -13,8 +13,6 @@
                 </v-toolbar>
             </template>
         </v-data-table>
-
-        <!-- Dialog für das Hinzufügen/Bearbeiten von Einträgen -->
         <v-dialog v-model="dialog" max-width="500px">
             <v-card>
                 <v-card-title>
@@ -24,11 +22,12 @@
                     <v-container>
                         <v-row>
                             <v-col cols="12">
-                                <v-text-field v-model="editedItem.tag" :label="t('fat.tag')"></v-text-field>
+                                <v-text-field v-model="editedItem.tag" :label="t('fat.tag')"
+                                    :rules="[required]"></v-text-field>
                             </v-col>
                             <v-col cols="12">
-                                <v-text-field v-model="editedItem.directory" :label="t('fat.directory')" readonly
-                                    @click="browseDirectory"></v-text-field>
+                                <v-text-field v-model="editedItem.directory" :label="t('fat.directory')" :rules="[required]"
+                                    readonly @click="browseDirectory"></v-text-field>
                             </v-col>
                         </v-row>
                     </v-container>
@@ -62,13 +61,20 @@ const dialog = ref(false);
 const editedIndex = ref(-1);
 const editedItem = ref({ id: '', tag: '', directory: '' });
 const formTitle = ref('');
+const loading = ref(false);
 
-// Verwenden Sie computed, um die Reaktivität sicherzustellen
+//Validation
+const required = (value) => !!value || t('fat.required');
+
 const tags = computed(() => settings.value.tags);
 
-// Beim Start die Einstellungen initialisieren
 onMounted(async () => {
-    await initializeSettings();
+    loading.value = true;
+    try {
+        await initializeSettings();
+    } finally {
+        loading.value = false;
+    }
 });
 
 function openEditDialog(item) {
@@ -85,18 +91,19 @@ function openAddDialog() {
     dialog.value = true;
 }
 
-function browseDirectory() {
-    open({
-        directory: true,
-        multiple: false
-    }).then(selected => {
+const browseDirectory = async () => {
+    try {
+        const selected = await open({
+            directory: true,
+            multiple: false
+        });
         if (selected) {
             editedItem.value.directory = selected;
         }
-    }).catch(error => {
+    } catch (error) {
         console.error('Error while choosing a directory:', error);
-    });
-}
+    }
+};
 
 function deleteItem(item) {
     const index = tags.value.indexOf(item);
@@ -110,15 +117,20 @@ function close() {
     dialog.value = false;
 }
 
-function save() {
-    if (editedIndex.value > -1) {
-        Object.assign(tags.value[editedIndex.value], editedItem.value);
-    } else {
-        settings.value.tags.push({ ...editedItem.value });
+const save = async () => {
+    loading.value = true;
+    try {
+        if (editedIndex.value > -1) {
+            Object.assign(tags.value[editedIndex.value], editedItem.value);
+        } else {
+            settings.value.tags.push({ ...editedItem.value });
+        }
+        saveSettings();
+    } finally {
+        loading.value = false;
+        close();
     }
-    saveSettings();
-    close();
-}
+};
 </script>
   
 <style></style>

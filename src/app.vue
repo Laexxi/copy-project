@@ -5,8 +5,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { initializeSettings, settingsManager, settings } from './hooks/useSettings.js';
+import { ref, onMounted, watchEffect } from 'vue';
+import { settingsManager, settings } from './hooks/useSettings.js';
 import { useTheme } from 'vuetify';
 import { useI18n } from 'vue-i18n';
 
@@ -20,23 +20,32 @@ const languageMap = {
   'Français': 'fr'
 };
 
+//Cached Theme setting
+const savedTheme = ref(null);
+
+const getSavedTheme = async () => {
+  savedTheme.value = await settingsManager.get('theme');
+};
+
 onMounted(async () => {
-  try {
-    await initializeSettings();
-    // Set the correct saved theme at startup
-    const savedTheme = await settingsManager.get('theme');
-    if (savedTheme) {
-      themeSetting.value = savedTheme;
-      theme.global.name.value = savedTheme;
-    }
-  } catch (error) {
-    console.error('Error loading the theme setting:', error);
+  await getSavedTheme();
+  //Set Theme
+  if (savedTheme.value) {
+    themeSetting.value = savedTheme.value;
+    theme.global.name.value = savedTheme.value;
   }
-  // Set the correct language at startup
+
+  // Set language
   const langCode = languageMap[settings.value.language];
   if (langCode) {
     locale.value = langCode;
   }
 });
+
+// Re-run on theme change
+watchEffect(() => {
+  theme.global.name.value = themeSetting.value;
+});
+
 
 </script>
