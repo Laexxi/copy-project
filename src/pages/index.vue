@@ -14,8 +14,7 @@
   
 <script setup lang="ts">
 import { readDir } from '@tauri-apps/api/fs';
-import { initializeSettings, settingsManager, settings } from '../hooks/useSettings';
-import { onMounted } from 'vue';
+import { initializeSettings, settingsManager } from '../hooks/useSettings';
 
 onMounted(async () => {
   await initializeSettings();

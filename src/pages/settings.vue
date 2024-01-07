@@ -37,16 +37,14 @@
 
 <script setup>
 import { settings, saveSettings } from '../hooks/useSettings.js';
-import { watch } from 'vue';
 import { open } from '@tauri-apps/api/dialog';
-import { useI18n } from 'vue-i18n';
 
 const { locale } = useI18n();
 
 const languageMap = {
   'English': 'en',
   'Deutsch': 'de',
-  'Français': 'fr'
+  'Français': 'fr',
 };
 
 watch(() => settings.value.language, (newLanguage) => {

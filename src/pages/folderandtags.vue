@@ -43,11 +43,9 @@
 </template>
   
 <script setup>
-import { ref, onMounted, computed } from 'vue';
 import { open } from '@tauri-apps/api/dialog';
 import { settings, saveSettings, initializeSettings } from '../hooks/useSettings';
 import { v4 as uuidv4 } from 'uuid';
-import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 

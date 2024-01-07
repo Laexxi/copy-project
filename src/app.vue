@@ -5,10 +5,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watchEffect } from 'vue';
 import { settingsManager, settings } from './hooks/useSettings.js';
-import { useTheme } from 'vuetify';
-import { useI18n } from 'vue-i18n';
 
 const themeSetting = ref('dark');
 const theme = useTheme();
@@ -17,7 +14,7 @@ const { locale } = useI18n();
 const languageMap = {
   'English': 'en',
   'Deutsch': 'de',
-  'Français': 'fr'
+  'Français': 'fr',
 };
 
 //Cached Theme setting
