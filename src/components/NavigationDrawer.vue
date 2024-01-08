@@ -1,4 +1,8 @@
 <script setup>
+
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useTheme } from 'vuetify';
 import { settings, saveSettings } from '../hooks/useSettings.js';
 
 const props = defineProps({
@@ -14,7 +18,6 @@ const theme = useTheme();
 
 const rail = ref(true);
 const submenu = ref(null);
-
 
 const themeIcon = computed(() => {
     return settings.value.theme === 'dark' ? 'mdi-weather-night' : 'mdi-weather-sunny';
@@ -82,20 +85,17 @@ const toggleTheme = async () => {
                     value="about"></v-list-item>
             </v-list>
         </div>
-
-        <template v-slot:append>
-            <v-divider></v-divider>
-            <v-footer :class="{ 'footer-container': true, 'collapsed-footer': !drawer }">
-                <div class="theme-button-container">
-                    <v-btn @click="toggleTheme" variant="plain">
-                        <v-icon>{{ themeIcon }}</v-icon>
-                    </v-btn>
-                </div>
-                <div class="version-number-container">
-                    <span class="version-number">Version: 0.1.0-alpha1</span>
-                </div>
-            </v-footer>
-        </template>
+        <v-divider></v-divider>
+        <v-footer :class="{ 'footer-container': true, 'collapsed-footer': !drawer }">
+            <div class="theme-button-container">
+                <v-btn @click="toggleTheme" variant="plain">
+                    <v-icon>{{ themeIcon }}</v-icon>
+                </v-btn>
+            </div>
+            <div class="version-number-container">
+                <span class="version-number">Version: 0.1.0-alpha1</span>
+            </div>
+        </v-footer>
     </v-navigation-drawer>
 </template>
 

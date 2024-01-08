@@ -11,6 +11,7 @@
 </template>
     
 <script setup>
+import { ref } from 'vue';
 import NavigationDrawer from '~/components/NavigationDrawer.vue';
 
 const drawer = ref(true);
