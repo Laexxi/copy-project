@@ -41,5 +41,13 @@
   },
   "auto": {
     "auto": "Automation"
+  },
+  "search": {
+    "searchbar": "Search...",
+    "filter": "Sort by",
+    "combobox": {
+      "tag": "Tags"
+    },
+    "selectall": "Select all"
   }
 }

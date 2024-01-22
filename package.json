@@ -8,13 +8,17 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "tauri": "tauri"
+    "tauri": "tauri",
+    "test": "vitest"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
     "@nuxtjs/i18n": "^8.0.0",
+    "@vitejs/plugin-vue": "^5.0.2",
+    "@vue/test-utils": "^2.4.3",
     "nuxt": "^3.9.0",
     "vite-plugin-vuetify": "^2.0.1",
+    "vitest": "^1.1.3",
     "vue": "^3.4.3",
     "vue-router": "^4.2.5",
     "vuetify": "^3.4.9"

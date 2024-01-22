@@ -16,6 +16,10 @@
 import { readDir } from '@tauri-apps/api/fs';
 import { initializeSettings, settingsManager, settings } from '../hooks/useSettings';
 import { onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { fileService } from '../hooks/fileService'
+
+const router = useRouter();
 
 onMounted(async () => {
   await initializeSettings();
@@ -31,13 +35,16 @@ const loadAndListDirectory = async (path?: string): Promise<void> => {
   if (savedDirectoryPath) {
     try {
       const files = await readDir(savedDirectoryPath);
-      console.log(files);
+      fileService.setFiles(files);
+      router.push({ name: 'searchlist' });
+
     } catch (error) {
       console.error('Error trying to read directory:', error);
     }
 
   }
 };
+
 </script>
   
 <style scoped></style>

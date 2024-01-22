@@ -11,6 +11,9 @@ import { useTheme } from 'vuetify';
 import { useI18n } from 'vue-i18n';
 
 const themeSetting = ref('dark');
+/**
+ * Gets the current theme from Vuetify to use in the component.
+ */
 const theme = useTheme();
 const { locale } = useI18n();
 
