@@ -5,7 +5,15 @@
       <!-- Navigation Drawer Component -->
       <v-navigation-drawer class="d-flex flex-column" v-model="drawer" :rail="rail" permanent @click.stop="rail = false">
         <!-- Drawer Header -->
-        <v-list-item prepend-icon="$menu" :title="$t('index.title')">
+        <!-- <v-list-item prepend-icon="$menu" :title="$t('index.title')">
+          <template v-slot:append>
+            <v-btn variant="text" icon="mdi-chevron-left" @click.stop="rail = !rail"></v-btn>
+          </template>
+        </v-list-item> -->
+        <v-list-item class="d-flex justify-space-between" :title="$t('index.title')">
+          <template v-slot:prepend>
+            <v-img src="@/assets/logo256.png" class="mr-2" height="24" width="24"></v-img>
+          </template>
           <template v-slot:append>
             <v-btn variant="text" icon="mdi-chevron-left" @click.stop="rail = !rail"></v-btn>
           </template>
@@ -67,6 +75,7 @@ const drawer = ref(true);
 const rail = ref(true);
 const submenu = ref(null);
 
+
 // Computed property for dynamic theme icon
 const themeIcon = computed(() => {
   return settings.value.theme === 'dark' ? 'mdi-weather-night' : 'mdi-weather-sunny';
@@ -121,7 +130,7 @@ const toggleTheme = async () => {
 }
 
 .submenu-item .v-icon {
-  font-size: 14px;
+  font-size: 18px;
 }
 
 .version-number {

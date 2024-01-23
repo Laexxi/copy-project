@@ -44,9 +44,9 @@
   },
   "search": {
     "searchbar": "Recherche...",
-    "filter": "Trier par",
+    "filter": "Filtrer par",
     "combobox": {
-      "tag": "Étiquettes"
+      "tag": "Choisir l`étiquette"
     },
     "selectall": "Tout sélectionner"
   }

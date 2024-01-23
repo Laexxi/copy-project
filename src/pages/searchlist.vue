@@ -3,13 +3,10 @@
         <!-- Top Bar with search and filter -->
         <v-row class="mb-2">
             <v-col cols="6">
-                <v-text-field v-model="searchQuery" :label="$t('search.searchbar')" solo hide-details></v-text-field>
+                <v-text-field prepend-inner-icon="mdi-magnify" v-model="searchQuery" :label="$t('search.searchbar')" solo
+                    hide-details></v-text-field>
             </v-col>
-            <v-col></v-col>
-            <v-col cols="3">
-                <v-select v-model="sortOrder" :items="sortOptions" :label="$t('search.filter')" solo
-                    hide-details></v-select>
-            </v-col>
+
         </v-row>
 
         <!-- main content -->
@@ -19,13 +16,13 @@
                     <v-col cols="1">
                         <v-checkbox v-model="item.selected"></v-checkbox>
                     </v-col>
-                    <v-col cols="9">
+                    <v-col cols="8">
                         <div v-bind="props" class="text-truncate">
                             {{ item.name }} <v-tooltip activator="parent" location="bottom">{{ item.name }}</v-tooltip>
                         </div>
                     </v-col>
-                    <v-col cols="2">
-                        <v-combobox clearable :items="dropdownItems" :label="$t('search.combobox.tag')" dense
+                    <v-col cols="3">
+                        <v-combobox clearable :items="tagItems" :label="$t('search.combobox.tag')" dense
                             style="width: 100%;"></v-combobox>
                     </v-col>
                 </v-row>
@@ -48,15 +45,19 @@
 import { ref, computed } from 'vue';
 import { useRoute } from 'vue-router';
 import { fileService } from '../hooks/fileService';
+import { settings } from '../hooks/useSettings';
 
 const route = useRoute();
 const files = fileService.getFiles();
-const selectedItems = ref([]);
+
+//search and filter
 const searchQuery = ref('');
-const sortOrder = ref(null);
-const sortOptions = ['Option 1', 'Option 2'];
+
+// Item Manipulation, Building of general list
 const selectAll = ref(false);
-const dropdownItems = ['Aktion 1', 'Aktion 2']; // Replace with your actual dropdown items
+const items = ref([]); // Structure: selected: bool, title:"", tags:[]
+
+
 
 const toggleSelectAll = (value) => {
     sortedAndFilteredFiles.forEach((item) => {
@@ -64,9 +65,13 @@ const toggleSelectAll = (value) => {
     });
 };
 
+//Fill tag-dropdown
+const tagItems = computed(() => {
+    return settings.value.tags.map(tag => tag.tag);
+});
+
 const sortedAndFilteredFiles = computed(() => {
-    // Implement sorting and filtering logic based on searchQuery and sortOrder
-    return files; // Example return
+    return files;
 });
 
 const goNext = () => {

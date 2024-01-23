@@ -44,9 +44,9 @@
   },
   "search": {
     "searchbar": "Suchen...",
-    "filter": "Sortieren nach",
+    "filter": "Filter nach",
     "combobox": {
-      "tag": "Tags"
+      "tag": "Wähle Tag"
     },
     "selectall": "Alle auswählen"
   }
