@@ -1,4 +1,3 @@
-// fileService.js
 export class FileService {
   constructor() {
     this.files = [];

@@ -48,6 +48,7 @@
     "combobox": {
       "tag": "Wähle Tag"
     },
-    "selectall": "Alle auswählen"
+    "selectall": "Alle auswählen",
+    "next": "Weiter"
   }
 }

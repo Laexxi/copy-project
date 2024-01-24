@@ -48,6 +48,7 @@
     "combobox": {
       "tag": "Choisir l`étiquette"
     },
-    "selectall": "Tout sélectionner"
+    "selectall": "Tout sélectionner",
+    "next": "Plus loin"
   }
 }
