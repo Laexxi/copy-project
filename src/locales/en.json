@@ -49,6 +49,7 @@
       "tag": "Choose Tag"
     },
     "selectall": "Select all",
-    "next": "Next"
+    "next": "Next",
+    "allitems": "All Items"
   }
 }

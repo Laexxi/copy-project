@@ -1,4 +1,3 @@
-<!-- TabContent.vue -->
 <template>
     <v-container>
         <v-tab-item v-if="currentTab === 0">
