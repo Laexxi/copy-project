@@ -1,44 +1,48 @@
 <template>
-    <v-container>
+    <v-toolbar>
         <!-- Top Bar with search and filter -->
         <v-row class="mb-2">
             <v-col cols="6">
                 <SearchBar :label="$t('search.searchbar')" @search="updateSearch" />
             </v-col>
         </v-row>
+        <template v-slot:extension>
+            <v-row>
+                <v-col cols="12">
+                    <v-tabs show-arrows v-model="tab">
+                        <v-tab key="0">{{ $t('search.allitems') }}</v-tab>
+                        <v-tab v-for="(tag, index) in tagItems" :key="index + 1">{{ tag }}</v-tab>
+                    </v-tabs>
+                </v-col>
+            </v-row>
+        </template>
+    </v-toolbar>
+    <v-window v-model="tab">
+        <!-- "All Items" Tab-Inhalt -->
+        <v-window-item value="0">
+            <ItemList :items="filteredItems" :tagItems="tagItems" />
+        </v-window-item>
 
-        <!-- Tabs -->
-        <v-row>
-            <v-col cols="12">
-                <v-tabs v-model="tab">
-                    <v-tab>{{ $t('search.allitems') }}</v-tab>
-                    <v-tab v-for="tag in tagItems" :key="tag">{{ tag }}</v-tab>
-                </v-tabs>
-            </v-col>
-        </v-row>
+        <!-- Inhalte für andere Tabs -->
+        <v-window-item v-for="(tag, index) in tagItems" :value="index + 1" :key="index + 1">
+            <ItemList :items="itemsFilteredByTag(tag)" :tagItems="tagItems" />
+        </v-window-item>
+    </v-window>
 
-        <!-- Tab-Content -->
-        <v-tabs-items v-model="tab">
-            <!-- "All Items" Tab -->
-            <v-tab-item key="all">
-                <ItemList :items="filteredItems" :tagItems="tagItems" />
-            </v-tab-item>
-        </v-tabs-items>
 
-        <!-- Bottom bar -->
-        <v-row class="mt-2">
-            <v-col cols="11">
-                <!-- Spacer -->
-            </v-col>
-            <v-col cols="1">
-                <v-btn @click="goNext">{{ $t('search.next') }}</v-btn>
-            </v-col>
-        </v-row>
-    </v-container>
+    <!-- Bottom bar -->
+    <v-row class="mt-2">
+        <v-col cols="11">
+            <!-- Spacer -->
+        </v-col>
+        <v-col cols="1">
+            <v-btn @click="goNext">{{ $t('search.next') }}</v-btn>
+        </v-col>
+    </v-row>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { fileService } from '../hooks/fileService';
 import { settings } from '../hooks/useSettings';
@@ -64,13 +68,17 @@ const initializeItems = () => {
     }));
 };
 
-const { filteredItems } = useSearch(items, searchQuery);
+const { filteredItems, filterItems } = useSearch(items, searchQuery);
 const updateSearch = (query) => {
     searchQuery.value = query;
 };
 
-
 const tagItems = computed(() => settings.value.tags.map(tag => tag.tag));
+
+const itemsFilteredByTag = (tag) => {
+    const filteredByTag = items.value.filter(item => item.tags.includes(tag));
+    return filterItems(filteredByTag, searchQuery.value);
+};
 
 const goNext = () => {
     // Logic for the Next button

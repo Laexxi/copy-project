@@ -1,14 +1,17 @@
 import { ref, computed } from "vue";
 
 export function useSearch(items, searchQuery) {
-  const filteredItems = computed(() => {
-    if (!searchQuery.value) {
-      return items.value;
+  const filteredItems = computed(() =>
+    filterItems(items.value, searchQuery.value)
+  );
+  const filterItems = (itemsToFilter, query) => {
+    if (!query) {
+      return itemsToFilter;
     }
-    return items.value.filter((item) =>
-      item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
+    return itemsToFilter.filter((item) =>
+      item.name.toLowerCase().includes(query.toLowerCase())
     );
-  });
+  };
 
-  return { filteredItems };
+  return { filteredItems, filterItems };
 }

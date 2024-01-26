@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import { useTheme } from 'vuetify';
 import { settings, saveSettings } from '../hooks/useSettings.js';
@@ -111,6 +111,12 @@ const toggleTheme = async () => {
     console.error('Error changing theme', error);
   }
 };
+
+watch(rail, (newRailValue) => {
+  if (newRailValue) {
+    submenu.value = null;
+  }
+});
 </script>
 
 <style>
