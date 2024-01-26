@@ -16,9 +16,9 @@
     "folderandtags": "Dossiers et Étiquettes",
     "source": "Répertoire Source",
     "browse": "Parcourir",
-    "mode": "Mode",
-    "manual": "Manuel",
-    "automatic": "Automatique",
+    "mode": "Mode préféré",
+    "copy": "Copie",
+    "move": "Se déplacer",
     "language": "Langue"
   },
   "about": {

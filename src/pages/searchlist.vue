@@ -65,6 +65,7 @@ const initializeItems = () => {
         name: file.name,
         tags: [],
         path: file.path,
+        tocopy: false,
     }));
 };
 

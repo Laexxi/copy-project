@@ -9,9 +9,10 @@
 
     <!-- Source Directory -->
     <v-row align="center">
-      <v-col cols="10">
+      <v-col cols="6">
         <v-text-field :label="$t('settings.source')" readonly v-model="settings.sourceDirectory"></v-text-field>
       </v-col>
+      <v-col cols="4"></v-col>
       <v-col cols="2">
         <v-btn @click="browseDirectory">{{ $t("settings.browse") }}</v-btn>
       </v-col>
@@ -19,15 +20,15 @@
 
     <!-- Copy Mode -->
     <v-row>
-      <v-col cols="12">
-        <v-select :label="$t('settings.mode')" :items="[$t('settings.manual'), $t('settings.automatic')]"
-          v-model="settings.copyMode"></v-select>
+      <v-col cols="4">
+        <v-select :label="$t('settings.mode')" :items="[$t('settings.move'), $t('settings.copy')]"
+          v-model="settings.mode"></v-select>
       </v-col>
     </v-row>
 
     <!-- Language Selection -->
     <v-row>
-      <v-col cols="12">
+      <v-col cols="4">
         <v-select :label="$t('settings.language')" :items="['English', 'Deutsch', 'Français']"
           v-model="settings.language"></v-select>
       </v-col>

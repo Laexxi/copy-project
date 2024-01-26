@@ -49,7 +49,7 @@
               </v-btn>
             </div>
             <div class="version-number-container">
-              <span class="version-number">Version: 0.1.0-alpha1</span>
+              <span class="version-number">Version: 0.2.0-alpha</span>
             </div>
           </v-footer>
         </template>

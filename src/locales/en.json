@@ -16,9 +16,9 @@
     "folderandtags": "Folder and Tags",
     "source": "Source Directory",
     "browse": "Browse",
-    "mode": "Mode",
-    "manual": "Manual",
-    "automatic": "Automatic",
+    "mode": "Preferred Mode",
+    "copy": "Copy",
+    "move": "Move",
     "language": "Language"
   },
   "about": {

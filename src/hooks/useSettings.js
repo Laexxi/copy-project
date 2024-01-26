@@ -5,7 +5,7 @@ import { SettingsManager } from "tauri-settings";
 const defaultSettings = {
   theme: "dark", // Default theme
   language: "English", // Default language
-  copyMode: "Manual", // Default copy mode
+  mode: "Move", // Default mode
   tags: [], //tags and folder array
   sourceDirectory: "",
 };
@@ -26,7 +26,7 @@ async function initializeSettings() {
 const saveSettings = async () => {
   await settingsManager.setCache("theme", settings.value.theme);
   await settingsManager.setCache("language", settings.value.language);
-  await settingsManager.setCache("copyMode", settings.value.copyMode);
+  await settingsManager.setCache("mode", settings.value.mode);
   await settingsManager.setCache("tags", settings.value.tags);
   await settingsManager.setCache(
     "sourceDirectory",

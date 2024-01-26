@@ -16,9 +16,9 @@
     "folderandtags": "Ordner und Tags",
     "source": "Quellverzeichnis",
     "browse": "Durchsuchen",
-    "mode": "Modus",
-    "manual": "Manuell",
-    "automatic": "Automatisch",
+    "mode": "Bevorzugter Modus",
+    "copy": "Kopieren",
+    "move": "Verschieben",
     "language": "Sprache"
   },
   "about": {

@@ -30,10 +30,10 @@ As I am developing on windows it will (should lol) work there. I chose Python be
 
 # Known Bugs/Issues
 
-- Missing translation in Table
 - Not session saving -> klicking on Home will delete everything -> sessions are planned
 - Submenus not collapsing when drawer shrinks
 - French translation could be a meme, used DeepL/Ai for it
+- U cannot delete a tag -> bugging tabs (workaraound: F5)
 
 # Getting Started
 
