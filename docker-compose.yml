@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  services:
+    myapp:
+      build: .
+      volumes:
+        - .:/app
+  command: pnpm tauri dev
