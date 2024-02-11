@@ -1,7 +1,10 @@
 version: "3.8"
 services:
-  services:
-    myapp:
-      build: .
-      volumes:
-        - .:/app
+  myapp:
+    build: .
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/src-tauri/target
+    ports:
+      - "3000:3000"
