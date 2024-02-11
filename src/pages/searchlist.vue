@@ -11,7 +11,7 @@
                 <v-col cols="12">
                     <v-tabs show-arrows v-model="tab">
                         <v-tab key="0">{{ $t('search.allitems') }}</v-tab>
-                        <v-tab v-for="(tag, index) in tagItems" :key="index + 1">{{ tag }}</v-tab>
+                        <v-tab v-for="(tag, index) in visibleTags" :key="index + 1">{{ tag }}</v-tab>
                     </v-tabs>
                 </v-col>
             </v-row>
@@ -24,7 +24,7 @@
         </v-window-item>
 
         <!-- Inhalte für andere Tabs -->
-        <v-window-item v-for="(tag, index) in tagItems" :value="index + 1" :key="index + 1">
+        <v-window-item v-for="(tag, index) in visibleTags" :value="index + 1" :key="tag">
             <ItemList :items="itemsFilteredByTag(tag)" :tagItems="tagItems" />
         </v-window-item>
     </v-window>
@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { fileService } from '../hooks/fileService';
 import { settings } from '../hooks/useSettings';
@@ -59,27 +59,40 @@ onMounted(() => {
     initializeItems();
 });
 
+// Array for data of items
 const initializeItems = () => {
     items.value = files.map(file => ({
         selected: false,
         name: file.name,
-        tags: [],
+        tags: file.tags || [],
         path: file.path,
         tocopy: false,
     }));
 };
-
+//Live Search
 const { filteredItems, filterItems } = useSearch(items, searchQuery);
 const updateSearch = (query) => {
     searchQuery.value = query;
 };
 
+// creation of tags
 const tagItems = computed(() => settings.value.tags.map(tag => tag.tag));
 
+// creation of itemlist
 const itemsFilteredByTag = (tag) => {
-    const filteredByTag = items.value.filter(item => item.tags.includes(tag));
+    const filteredByTag = items.value.filter(item => item.tags && item.tags.includes(tag));
     return filterItems(filteredByTag, searchQuery.value);
 };
+
+// dynamic visibility of tabs; dont show with no item
+const visibleTags = computed(() => {
+    return tagItems.value.filter(tag => {
+        return items.value.some(item => item.tags && item.tags.includes(tag));
+    });
+});
+
+watch(items, () => {
+}, { deep: true });
 
 const goNext = () => {
     // Logic for the Next button
