@@ -2,10 +2,13 @@
 FROM node:latest as build-stage
 RUN npm install -g pnpm
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
+COPY package.json pnpm-lock.yaml ./
+RUN pnpm install
 COPY . .
-RUN pnpm generate
+# Expose the port your app runs on
+EXPOSE 3000
+
+
 
 # Stage 2: Setup Rust for Tauri
 FROM rust:latest
@@ -13,3 +16,6 @@ WORKDIR /app
 COPY --from=build-stage /app /app
 RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 RUN cargo build --release
+
+# Command to run your app
+CMD ["pnpm", "tauri", "dev"]
