@@ -1,10 +1,21 @@
-FROM node:current
-RUN apt-get update && apt-get install -y git
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
-ENV PATH="/root/.cargo/bin:${PATH}"
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-EXPOSE 3000
+FROM rust:latest
+RUN apt-get update && apt-get install -y \
+    libwebkit2gtk-4.0-dev \
+    build-essential \
+    curl \
+    wget \
+    file \
+    git \
+    && curl -fsSL https://deb.nodesource.com/setup_current.x | bash - \
+    && apt-get install -y nodejs \
+    && npm install -g pnpm
 
-CMD ["npm", "start"]
+RUN cargo install tauri-cli
+
+WORKDIR /usr/src/copy-project
+
+RUN git clone https://Laexxi/copy-project.git .
+
+RUN pnpm install
+
+ENTRYPOINT ["/bin/bash"]
