@@ -36,4 +36,8 @@ export default defineNuxtConfig({
       },
     },
   },
+
+  plugins: [
+    '~/plugins/context-menu.js'
+  ],
 })

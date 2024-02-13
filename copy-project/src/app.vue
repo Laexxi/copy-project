@@ -1,7 +1,9 @@
 <template>
-  <NuxtLayout>
+  <div v-no-context-menu>
+    <NuxtLayout>
 
-  </NuxtLayout>
+    </NuxtLayout>
+  </div>
 </template>
 
 <script setup>

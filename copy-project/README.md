@@ -27,6 +27,7 @@ As I am developing on windows it will (should lol) work there. I chose Python be
 - Maybe: Improved Tagging (Auto-Tagging by file type)
 - Maybe: Automatic workflow
 - Fully automated version management and package publishing
+- Mode (copy, move) specific for tags
 
 # Known Bugs/Issues
 
