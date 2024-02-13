@@ -8,7 +8,7 @@
     </v-row>
 
     <!-- Source Directory -->
-    <v-row align="center">
+    <!-- <v-row align="center">
       <v-col cols="6">
         <v-text-field :label="$t('settings.source')" readonly v-model="settings.sourceDirectory"></v-text-field>
       </v-col>
@@ -16,7 +16,7 @@
       <v-col cols="2">
         <v-btn @click="browseDirectory">{{ $t("settings.browse") }}</v-btn>
       </v-col>
-    </v-row>
+    </v-row> -->
 
     <!-- Copy Mode -->
     <v-row>
