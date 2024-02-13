@@ -9,9 +9,11 @@
         </v-btn>
       </v-col>
     </v-row>
+
+    <!-- <v-img class="fixed-top fill-height" src="~/assets/images/background.jpg" opacity="0.3" position="absolute"></v-img> -->
   </v-container>
 </template>
-  
+
 <script setup lang="ts">
 import { readDir } from '@tauri-apps/api/fs';
 import { initializeSettings, settingsManager, settings } from '../hooks/useSettings';
@@ -46,6 +48,35 @@ const loadAndListDirectory = async (path?: string): Promise<void> => {
 };
 
 </script>
-  
-<style scoped></style>
-  
+
+<style scoped>
+.text-h4 {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+
+.mt-10 {
+  margin-top: 10px;
+}
+
+.v-btn {
+  background-color: #03a9f4;
+  color: #fff;
+}
+
+.v-icon {
+  color: #fff;
+}
+
+/* Hintergrundbild */
+.fixed-top {
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+}
+
+.fill-height {
+  height: 100vh;
+}
+</style>
