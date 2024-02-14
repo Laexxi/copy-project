@@ -48,7 +48,7 @@ import { fileService } from '../hooks/fileService';
 import { settings } from '../hooks/useSettings';
 import { useSearch } from '../hooks/useSearch';
 import { useItems } from '../hooks/useItems';
-import ItemListContent from '../components/ItemListContent.vue';
+import SubItemList from '../components/SubItemList.vue';
 
 const route = useRoute();
 const files = fileService.getFiles();
