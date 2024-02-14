@@ -1,16 +1,16 @@
 <template>
     <div class="table-container">
+        <v-toolbar flat>
+            <v-toolbar-title>{{ $t('fat.tags') }}</v-toolbar-title>
+            <v-btn color="primary" dark class="mb-2" @click="openAddDialog">{{ $t('fat.newentry') }}</v-btn>
+        </v-toolbar>
         <v-data-table :headers="headers" :items="tags" class="elevation-1">
+            <template v-slot:item.defaultOperation="{ item }">
+                {{ item.defaultOperation === '0' ? t('fat.move') : t('fat.copy') }}
+            </template>
             <template v-slot:item.action="{ item }">
                 <v-icon small class="mr-2" @click="openEditDialog(item)">mdi-pencil</v-icon>
                 <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
-            </template>
-            <template v-slot:top>
-                <v-toolbar flat>
-                    <v-toolbar-title>{{ $t('fat.tags') }}</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-btn color="primary" dark class="mb-2" @click="openAddDialog">{{ $t('fat.newentry') }}</v-btn>
-                </v-toolbar>
             </template>
         </v-data-table>
         <v-dialog v-model="dialog" max-width="500px">
@@ -21,14 +21,19 @@
                 <v-card-text>
                     <v-container>
                         <v-row>
-                            <v-col cols="12">
-                                <v-text-field v-model="editedItem.tag" :label="t('fat.tag')"
-                                    :rules="[required]"></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-text-field v-model="editedItem.directory" :label="t('fat.directory')" :rules="[required]"
-                                    readonly @click="browseDirectory"></v-text-field>
-                            </v-col>
+                            <v-text-field v-model="editedItem.tag" :label="t('fat.tag')" :rules="[required]"></v-text-field>
+                        </v-row>
+                        <v-row>
+                            <v-text-field v-model="editedItem.directory" :label="t('fat.directory')" :rules="[required]"
+                                readonly @click="browseDirectory"></v-text-field>
+                        </v-row>
+                        <v-row justify="center" align-content="center">
+                            <div class="d-flex align-center justify-center">
+                                <v-radio-group v-model="editedItem.defaultOperation" inline>
+                                    <v-radio :label="t('fat.move')" value="0"></v-radio>
+                                    <v-radio :label="t('fat.copy')" value="1"></v-radio>
+                                </v-radio-group>
+                            </div>
                         </v-row>
                     </v-container>
                 </v-card-text>
@@ -51,15 +56,17 @@ import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
+// TODO: Fix headers not showing.
 const headers = computed(() => [
-    { text: t('fat.tag'), align: 'start', sortable: false, value: 'tag' },
-    { text: t('fat.directory'), value: 'directory' },
+    { text: t('fat.tag'), value: 'tag', sortable: false },
+    { text: t('fat.directory'), value: 'directory', sortable: false },
+    { text: t('fat.standardoperation'), value: 'defaultOperation', sortable: false },
     { text: t('fat.actions'), value: 'action', sortable: false }
 ]);
 
 const dialog = ref(false);
 const editedIndex = ref(-1);
-const editedItem = ref({ id: '', tag: '', directory: '' });
+const editedItem = ref({ id: '', tag: '', directory: '', defaultOperation: '' });
 const formTitle = ref('');
 const loading = ref(false);
 
@@ -77,6 +84,8 @@ onMounted(async () => {
     }
 });
 
+//Dialog
+
 function openEditDialog(item) {
     editedIndex.value = tags.value.indexOf(item);
     editedItem.value = Object.assign({}, item);
@@ -86,7 +95,7 @@ function openEditDialog(item) {
 
 function openAddDialog() {
     editedIndex.value = -1;
-    editedItem.value = { id: uuidv4(), tag: '', directory: '' };
+    editedItem.value = { id: uuidv4(), tag: '', directory: '', defaultOperation: '' };
     formTitle.value = t('fat.new');
     dialog.value = true;
 }
@@ -104,6 +113,11 @@ const browseDirectory = async () => {
         console.error('Error while choosing a directory:', error);
     }
 };
+//Switch
+const defaultOperation = ref(0); // 0 = move; 1=copy
+
+
+// Tag handling
 
 function deleteItem(item) {
     const index = tags.value.indexOf(item);
@@ -117,6 +131,7 @@ function close() {
     dialog.value = false;
 }
 
+// Save to config
 const save = async () => {
     loading.value = true;
     try {

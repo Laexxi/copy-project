@@ -37,7 +37,11 @@
     "save": "Speichern",
     "edit": "Eintrag bearbeiten",
     "new": "Neuer Eintrag",
-    "actions": "Aktionen"
+    "actions": "Aktionen",
+    "standardoperation": "Standard Modus",
+    "required": "Erforderlich",
+    "move": "Verschieben",
+    "copy": "Kopieren"
   },
   "auto": {
     "auto": "Automatisierung"

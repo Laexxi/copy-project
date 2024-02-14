@@ -19,12 +19,12 @@
     </v-row> -->
 
     <!-- Copy Mode -->
-    <v-row>
+    <!-- <v-row>
       <v-col cols="4">
         <v-select :label="$t('settings.mode')" :items="[$t('settings.move'), $t('settings.copy')]"
           v-model="settings.mode"></v-select>
       </v-col>
-    </v-row>
+    </v-row> -->
 
     <!-- Language Selection -->
     <v-row>

@@ -37,7 +37,11 @@
     "save": "Save",
     "edit": "Edit Entry",
     "new": "New Entry",
-    "actions": "Actions"
+    "actions": "Actions",
+    "standardoperation": "Standard Operation",
+    "required": "Required",
+    "move": "Move",
+    "copy": "Copy"
   },
   "auto": {
     "auto": "Automation"

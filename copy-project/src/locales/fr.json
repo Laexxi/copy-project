@@ -37,7 +37,11 @@
     "save": "Enregistrer",
     "edit": "Modifier l'entrée",
     "new": "Nouvelle Entrée",
-    "actions": "Actions"
+    "actions": "Actions",
+    "standardoperation": "Mode standard",
+    "required": "Requis",
+    "move": "Se déplacer",
+    "copy": "Copie"
   },
   "auto": {
     "auto": "Automatisation"
