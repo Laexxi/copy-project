@@ -25,7 +25,8 @@
 
         <!-- Inhalte für andere Tabs -->
         <v-window-item v-for="(tag, index) in visibleTags" :value="index + 1" :key="tag">
-            <ItemList :items="itemsFilteredByTag(tag)" :tagItems="tagItems" />
+            <!-- <ItemList :items="itemsFilteredByTag(tag)" :tagItems="tagItems" /> -->
+            <SubList :items="itemsFilteredByTag(tag)" :tagItems="tagItems" />
         </v-window-item>
     </v-window>
 
@@ -42,6 +43,7 @@
 </template>
 
 <script setup>
+import SubList from '../components/SubList.vue';
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { fileService } from '../hooks/fileService';

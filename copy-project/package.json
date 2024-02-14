@@ -31,6 +31,7 @@
     "tauri-plugin-window-state-api": "github:tauri-apps/tauri-plugin-window-state#v1",
     "tauri-settings": "^0.3.4",
     "uuid": "^9.0.1",
-    "vue-i18n": "^9.8.0"
+    "vue-i18n": "^9.8.0",
+    "vuedraggable": "^4.1.0"
   }
 }
