@@ -20,12 +20,12 @@
     <v-window v-model="tab">
         <!-- "All Items" Tab-Inhalt -->
         <v-window-item value="0">
-            <ItemListContent :items="filteredItems" :tagItems="tagItems" />
+            <ItemList :items="filteredItems" :tagItems="tagItems" />
         </v-window-item>
 
         <!-- Inhalte für andere Tabs -->
         <v-window-item v-for="(tag, index) in visibleTags" :value="index + 1" :key="tag">
-            <ItemListContent :items="itemsFilteredByTag(tag)" :tagItems="tagItems" />
+            <SubItemList :items="itemsFilteredByTag(tag)" :tagItems="tagItems" />
         </v-window-item>
     </v-window>
 
@@ -48,7 +48,6 @@ import { fileService } from '../hooks/fileService';
 import { settings } from '../hooks/useSettings';
 import { useSearch } from '../hooks/useSearch';
 import { useItems } from '../hooks/useItems';
-import SubItemList from '../components/SubItemList.vue';
 
 const route = useRoute();
 const files = fileService.getFiles();
