@@ -5,8 +5,8 @@
             <v-btn color="primary" dark class="mb-2" @click="openAddDialog">{{ $t('fat.newentry') }}</v-btn>
         </v-toolbar>
         <v-data-table :headers="headers" :items="tags" class="elevation-1">
-            <template v-slot:item.defaultOperation="{ item }">
-                {{ item.defaultOperation === '0' ? t('fat.move') : t('fat.copy') }}
+            <template v-slot:item.copyMode="{ item }">
+                {{ item.copyMode === 'false' ? t('fat.move') : t('fat.copy') }}
             </template>
             <template v-slot:item.action="{ item }">
                 <v-icon small class="mr-2" @click="openEditDialog(item)">mdi-pencil</v-icon>
@@ -29,9 +29,9 @@
                         </v-row>
                         <v-row justify="center" align-content="center">
                             <div class="d-flex align-center justify-center">
-                                <v-radio-group v-model="editedItem.defaultOperation" inline>
-                                    <v-radio :label="t('fat.move')" value="0"></v-radio>
-                                    <v-radio :label="t('fat.copy')" value="1"></v-radio>
+                                <v-radio-group v-model="editedItem.copyMode" inline>
+                                    <v-radio :label="t('fat.move')" value="false"></v-radio>
+                                    <v-radio :label="t('fat.copy')" value="true"></v-radio>
                                 </v-radio-group>
                             </div>
                         </v-row>
@@ -60,13 +60,13 @@ const { t } = useI18n();
 const headers = computed(() => [
     { text: t('fat.tag'), value: 'tag', sortable: false },
     { text: t('fat.directory'), value: 'directory', sortable: false },
-    { text: t('fat.standardoperation'), value: 'defaultOperation', sortable: false },
+    { text: t('fat.standardoperation'), value: 'copyMode', sortable: false },
     { text: t('fat.actions'), value: 'action', sortable: false }
 ]);
 
 const dialog = ref(false);
 const editedIndex = ref(-1);
-const editedItem = ref({ id: '', tag: '', directory: '', defaultOperation: '' });
+const editedItem = ref({ id: '', tag: '', directory: '', copyMode: '' });
 const formTitle = ref('');
 const loading = ref(false);
 
@@ -95,7 +95,7 @@ function openEditDialog(item) {
 
 function openAddDialog() {
     editedIndex.value = -1;
-    editedItem.value = { id: uuidv4(), tag: '', directory: '', defaultOperation: '' };
+    editedItem.value = { id: uuidv4(), tag: '', directory: '', copyMode: '' };
     formTitle.value = t('fat.new');
     dialog.value = true;
 }
@@ -114,7 +114,7 @@ const browseDirectory = async () => {
     }
 };
 //Switch
-const defaultOperation = ref(0); // 0 = move; 1=copy
+const copyMode = ref(false); // false = move; true=copy
 
 
 // Tag handling
