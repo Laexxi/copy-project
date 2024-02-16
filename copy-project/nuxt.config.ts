@@ -16,7 +16,8 @@ export default defineNuxtConfig({
         config.plugins?.push(vuetify({ autoImport: true}))
       })
     },
-    '@nuxtjs/i18n'
+    '@nuxtjs/i18n',
+    '@vueuse/nuxt'
   ],
 
   i18n: {
