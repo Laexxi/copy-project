@@ -10,7 +10,7 @@
             </template>
             <template v-slot:item.action="{ item }">
                 <v-icon small class="mr-2" @click="openEditDialog(item)">mdi-pencil</v-icon>
-                <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+                <v-icon small @click="deleteTag(item)">mdi-delete</v-icon>
             </template>
         </v-data-table>
         <v-dialog v-model="dialog" max-width="500px">
@@ -40,7 +40,7 @@
                 <v-card-actions>
                     <v-spacer></v-spacer>
                     <v-btn color="blue darken-1" text @click="close">{{ $t('fat.abort') }}</v-btn>
-                    <v-btn color="blue darken-1" text @click="save">{{ $t('fat.save') }}</v-btn>
+                    <v-btn color="blue darken-1" text @click="saveTag">{{ $t('fat.save') }}</v-btn>
                 </v-card-actions>
             </v-card>
         </v-dialog>
@@ -50,9 +50,11 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { open } from '@tauri-apps/api/dialog';
-import { settings, saveSettings, initializeSettings } from '../hooks/useSettings';
-import { v4 as uuidv4 } from 'uuid';
+//import { settings, saveSettings, initializeSettings } from '../hooks/useSettings';
+//import { v4 as uuidv4 } from 'uuid';
 import { useI18n } from 'vue-i18n';
+import { tagService } from '../database/tagService.js';
+import { liveQuery } from 'dexie';
 
 const { t } = useI18n();
 
@@ -66,26 +68,11 @@ const headers = computed(() => [
 
 const dialog = ref(false);
 const editedIndex = ref(-1);
-const editedItem = ref({ id: '', tag: '', directory: '', copyMode: '' });
+const editedItem = ref({ tag: '', directory: '', copyMode: '' });
 const formTitle = ref('');
 const loading = ref(false);
 
-//Validation
-const required = (value) => !!value || t('fat.required');
-
-const tags = computed(() => settings.value.tags);
-
-onMounted(async () => {
-    loading.value = true;
-    try {
-        await initializeSettings();
-    } finally {
-        loading.value = false;
-    }
-});
-
 //Dialog
-
 function openEditDialog(item) {
     editedIndex.value = tags.value.indexOf(item);
     editedItem.value = Object.assign({}, item);
@@ -95,7 +82,7 @@ function openEditDialog(item) {
 
 function openAddDialog() {
     editedIndex.value = -1;
-    editedItem.value = { id: uuidv4(), tag: '', directory: '', copyMode: '' };
+    editedItem.value = { tag: '', directory: '', copyMode: '' };
     formTitle.value = t('fat.new');
     dialog.value = true;
 }
@@ -113,39 +100,106 @@ const browseDirectory = async () => {
         console.error('Error while choosing a directory:', error);
     }
 };
+
+//Validation
+const required = (value) => !!value || t('fat.required');
+
 //Switch
 const copyMode = ref(false); // false = move; true=copy
 
-
-// Tag handling
-
-function deleteItem(item) {
-    const index = tags.value.indexOf(item);
-    if (index > -1) {
-        settings.value.tags.splice(index, 1);
-        saveSettings();
-    }
-}
-
+//close Dialog
 function close() {
     dialog.value = false;
 }
 
-// Save to config
-const save = async () => {
+// const tags = computed(() => settings.value.tags);
+
+// onMounted(async () => {
+//     loading.value = true;
+//     try {
+//         await initializeSettings();
+//     } finally {
+//         loading.value = false;
+//     }
+// });
+
+// // Tag handling
+
+// function deleteItem(item) {
+//     const index = tags.value.indexOf(item);
+//     if (index > -1) {
+//         settings.value.tags.splice(index, 1);
+//         saveSettings();
+//     }
+// }
+
+// // Save to config
+// const save = async () => {
+//     loading.value = true;
+//     try {
+//         if (editedIndex.value > -1) {
+//             Object.assign(tags.value[editedIndex.value], editedItem.value);
+//         } else {
+//             settings.value.tags.push({ ...editedItem.value });
+//         }
+//         saveSettings();
+//     } finally {
+//         loading.value = false;
+//         close();
+//     }
+// };
+
+//load from database
+const tags = ref([]);
+
+onMounted(() => {
+    loading.value = true;
+    const liveQuerySubscription = liveQuery(() => tagService.getAllTags())
+        .subscribe((loadedTags) => {
+            tags.value = loadedTags;
+            loading.value = false;
+        }, (error) => {
+            console.error('LiveQuery subscription error:', error);
+            loading.value = false;
+        });
+
+    onUnmounted(() => {
+        liveQuerySubscription.unsubscribe();
+    });
+});
+
+const saveTag = async () => {
     loading.value = true;
     try {
+        const toSave = {
+            ...editedItem.value,
+            copyMode: editedItem.value.copyMode === 'true' || editedItem.value.copyMode === true // Stellen Sie sicher, dass copyMode als Boolean gespeichert wird
+        };
         if (editedIndex.value > -1) {
-            Object.assign(tags.value[editedIndex.value], editedItem.value);
+            await tagService.updateTag(tags.value[editedIndex.value].id, toSave);
         } else {
-            settings.value.tags.push({ ...editedItem.value });
+            await tagService.addTag(toSave);
         }
-        saveSettings();
+    } catch (error) {
+        console.error('Error saving tag:', error);
     } finally {
         loading.value = false;
         close();
     }
 };
+
+
+const deleteTag = async (item) => {
+    try {
+        await tagService.deleteTag(item.id);
+        tags.value = await tagService.getAllTags(); // Reload tags
+    } catch (error) {
+        console.error('Error deleting tag:', error);
+    }
+};
+
+
+
 </script>
   
 <style></style>
