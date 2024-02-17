@@ -6,7 +6,7 @@
         </v-toolbar>
         <v-data-table :headers="headers" :items="tags" class="elevation-1">
             <template v-slot:item.copyMode="{ item }">
-                {{ item.copyMode === 'false' ? t('fat.move') : t('fat.copy') }}
+                {{ item.copyMode ? t('fat.copy') : t('fat.move') }}
             </template>
             <template v-slot:item.action="{ item }">
                 <v-icon small class="mr-2" @click="openEditDialog(item)">mdi-pencil</v-icon>
@@ -30,8 +30,8 @@
                         <v-row justify="center" align-content="center">
                             <div class="d-flex align-center justify-center">
                                 <v-radio-group v-model="editedItem.copyMode" inline>
-                                    <v-radio :label="t('fat.move')" value="false"></v-radio>
-                                    <v-radio :label="t('fat.copy')" value="true"></v-radio>
+                                    <v-radio :label="t('fat.move')" :value="false"></v-radio>
+                                    <v-radio :label="t('fat.copy')" :value="true"></v-radio>
                                 </v-radio-group>
                             </div>
                         </v-row>
@@ -187,7 +187,6 @@ const saveTag = async () => {
         close();
     }
 };
-
 
 const deleteTag = async (item) => {
     try {
